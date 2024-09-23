@@ -22,6 +22,7 @@ class Product(models.Model):
     out_of_storage_sizes = models.ManyToManyField(Sizes, related_name="OutOfStorageSizes_products")
     wish_list = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, related_name="wish_list")
     cart = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, related_name="cart")
+    image = models.ImageField(upload_to='products/', default='products/default-image.jpg')
 
     def __str__(self):
         return self.name
