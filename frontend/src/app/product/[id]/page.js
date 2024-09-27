@@ -1,18 +1,30 @@
+'use client'
+
 import Header from "@/app/components/Header/Header";
+import Main from "@/app/components/Main/Main";
+import { useEffect, useState } from "react";
+import axios from 'axios';
 
 export default function ProductPage({params}) {
 
-  const productId = params.id
+  const [product, setProduct] = useState({})
 
-  // useEffect(() => {
-  //   fetch(`/getProduct`)
-  // }, [params.id])
-  
+  const productId = params.id
+      
+  useEffect(() => {
+    axios.get(`http://127.0.0.1:8000/api/getProduct/${productId}`)
+    .then(response => setProduct(response.data.product))
+  }, [productId])
+
+  console.log(product)
 
   return (
     <div>
       <Header />
-      {productId}
+      <Main>
+      <img src={`http://127.0.0.1:8000/media/${product.image}`} />
+
+      </Main>
     </div>
   );
 }

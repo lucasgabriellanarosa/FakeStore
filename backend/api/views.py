@@ -34,3 +34,16 @@ def getCategories(request):
 def getProductsByCategory(request, category):
     products = list(Product.objects.filter(categories=category).values())
     return JsonResponse({"products": products}, safe=False)
+
+def getProduct(request, id):
+    productData = Product.objects.get(id=id)
+
+    product = {
+        'id': productData.id,
+        'name': productData.name,
+        'price': str(productData.price),
+        'description': productData.description,
+        'storage': productData.storage,
+        'image': str(productData.image),
+    }
+    return JsonResponse({"product": product}, safe=False)

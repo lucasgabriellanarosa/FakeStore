@@ -14,6 +14,9 @@ import './globals.css'
 
 import { useRouter } from 'next/navigation';
 import Header from "./components/Header/Header";
+import Main from "./components/Main/Main";
+
+import axios from 'axios';
 
 export default function Home() {
 
@@ -25,16 +28,15 @@ export default function Home() {
     const [categories, setCategories] = useState([])
     
     useEffect(() => {
-        fetch(`http://127.0.0.1:8000/api/getCategories/`)
-            .then((res) => res.json())
-            .then((data) => setCategories(data.categories))
+        axios.get(`http://127.0.0.1:8000/api/getCategories/`)
+        .then(response => setCategories(response.data.categories))
     }, [])
 
     return (
         <div>
             <Header />
 
-            <main className="pt-32 pb-10 flex flex-col px-6">
+            <Main>
                 <ul className="flex flex-col gap-5">
                     {Object.values(categories).map((category) => (
                         <li className="text-2xl capitalize flex flex-col gap-1" key={category.id}>
@@ -67,7 +69,7 @@ export default function Home() {
                         </li>
                     ))}
                 </ul>
-            </main>
+            </Main>
 
 
         </div>
