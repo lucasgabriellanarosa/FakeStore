@@ -1,67 +1,71 @@
 "use client";
 
-import { GoPerson } from "react-icons/go";
-import { LuShoppingCart } from "react-icons/lu";
-import { FaRegHeart } from "react-icons/fa";
-import { IoIosSearch } from "react-icons/io";
 import { useEffect, useState } from "react";
 
+import { FaRegHeart } from "react-icons/fa";
+
+
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import { Pagination } from 'swiper/modules';
+
+import './globals.css'
+
+import { useRouter } from 'next/navigation';
+import Header from "./components/Header/Header";
+
 export default function Home() {
+
+    const router = useRouter();
+    const handleNavigate = (id) => {
+        router.push(`/product/${id}`);
+    };
+
     const [categories, setCategories] = useState([])
+    
     useEffect(() => {
         fetch(`http://127.0.0.1:8000/api/getCategories/`)
-        .then((res) => res.json())
-        .then((data) => setCategories(data.categories))
+            .then((res) => res.json())
+            .then((data) => setCategories(data.categories))
     }, [])
-
 
     return (
         <div>
+            <Header />
 
-            <header className="px-5 py-3 flex flex-col gap-3 shadow-md fixed w-full z-50">
-
-                {/* TOP */}
-                <div className="flex justify-between items-center">
-                    <h1 className="text-4xl">Shoppe</h1>
-                    <ul className="flex gap-3">
-                        <li className="text-2xl">
-                            <FaRegHeart />
-                        </li> 
-                        <li className="text-2xl">
-                            <LuShoppingCart />
-                        </li>   
-                        <li className="text-2xl">
-                            <GoPerson />
-                        </li>     
-                    </ul>
-                </div>
-
-                <form className="flex justify-center items-center gap-1 border-gray-300 border-solid border-2 w-min self-center px-3 py-1 rounded-2xl shadow-sm">
-                    <input placeholder="O que você procura hoje?" className="w-60"/>
-                    <IoIosSearch className="text-xl" />
-                </form>
-
-            </header>
-
-            <main className="pt-32 flex flex-col px-6">
+            <main className="pt-32 pb-10 flex flex-col px-6">
                 <ul className="flex flex-col gap-5">
-                { Object.values(categories).map( (category) => (
-                    <li className="text-2xl capitalize" key={category.id}>{category.name}
-                            <ul className="flex gap-3">
-                            {category.products.length > 0 ? (
-                                category.products.map((product) => (
-                                    <li key={product.id} className="border-4 border-solid border-blue-500 px-5 py-3">
-                                        {product.name}
-                                        <img src={`http://127.0.0.1:8000/media/${product.image}`} />
-                                    </li>
-                                ))
-                            )
-                            :
-                            <li>No products available.</li>
-                        }
-                        </ul>
-                    </li>
-                ))}
+                    {Object.values(categories).map((category) => (
+                        <li className="text-2xl capitalize flex flex-col gap-1" key={category.id}>
+                            <h2>{category.name} </h2>
+                            <Swiper
+                                slidesPerView={2}
+                                spaceBetween={20}
+                                pagination={{
+                                    clickable: true,
+                                }}
+                                modules={[Pagination]}
+                            >
+                                {category.products.length > 0 ? (
+                                    category.products.map((product) => (
+                                        <SwiperSlide key={product.id} className="border-2 border-gray-200 p-2 flex flex-col gap-2">
+                                            <FaRegHeart className="self-end text-xl" />
+                                            <img className="min-h-32 max-h-32" src={`http://127.0.0.1:8000/media/${product.image}`} />
+                                            <div>
+                                                <h3 onClick={() => handleNavigate(`${product.id}`)} className="text-gray-700 text-2xl italic underline hover:cursor-pointer">{product.name}</h3>
+                                                <h4 className="text-gray-500 text-xl italic">R${product.price}</h4>
+                                            </div>
+                                        </SwiperSlide>
+                                    ))
+                                )
+
+                                    :
+                                    <li>No products available.</li>
+                                }
+                            </Swiper>
+                        </li>
+                    ))}
                 </ul>
             </main>
 
