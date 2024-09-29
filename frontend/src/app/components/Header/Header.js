@@ -1,34 +1,47 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { GoPerson } from "react-icons/go";
 import { LuShoppingCart } from "react-icons/lu";
 import { FaRegHeart } from "react-icons/fa";
 import { IoIosSearch } from "react-icons/io";
 import { useRouter } from 'next/navigation';
+import useAuth from '@/app/hooks/useAuth';
 
 const Header = () => {
 
     const router = useRouter();
-    const handleNavigate = () => {
-        router.push(`/`);
+    const handleNavigate = (url) => {
+        router.push(`${url}`);
     };
+
+    const isUserLogged = useAuth();
 
     return (
         <header className="bg-white px-5 py-3 flex flex-col gap-3 shadow-md fixed w-full z-50">
 
             <div className="flex justify-between items-center">
-                <h1 className="text-4xl" onClick={handleNavigate}>Shoppe</h1>
+                <h1 className="text-4xl hover:cursor-pointer" onClick={() => handleNavigate('/')}>Shoppe</h1>
                 <ul className="flex gap-3">
-                    <li className="text-2xl">
-                        <FaRegHeart />
-                    </li>
-                    <li className="text-2xl">
-                        <LuShoppingCart />
-                    </li>
-                    <li className="text-2xl">
-                        <GoPerson />
-                    </li>
+                    {
+                        isUserLogged ?
+                            <>
+                                <li className="text-2xl">
+                                    <FaRegHeart />
+                                </li>
+                                <li className="text-2xl">
+                                    <LuShoppingCart />
+                                </li>
+                                <li className="text-2xl">
+                                    <GoPerson onClick={() => handleNavigate('/login')} />
+                                </li>
+                            </>
+                            :
+                            <li className="text-2xl">
+                                <GoPerson onClick={() => handleNavigate('/login')} />
+                            </li>
+                    }
+
                 </ul>
             </div>
 
