@@ -5,7 +5,6 @@ import Header from '../components/Header/Header'
 import Main from '../components/Main/Main'
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
-import useAuth from '../hooks/useAuth';
 
 const page = () => {
 
@@ -26,7 +25,9 @@ const page = () => {
     axios.post(`http://127.0.0.1:8000/api/login/`, data, {
       withCredentials: true,
     })
-    .then(response => console.log(response.data))
+    .then(response => 
+      router.push(`/profile`)
+    )
   }
 
   return (

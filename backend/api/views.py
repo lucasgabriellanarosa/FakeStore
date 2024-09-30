@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from .models import *
 import json
 from django.views.decorators.csrf import csrf_exempt
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
 
@@ -87,7 +87,12 @@ def loginUser(request):
             login(request, user)
             return JsonResponse({'message': 'Login successful'}, status=200)
         
-
+@csrf_exempt
+def logoutUser(request):
+    if request.method == 'POST':
+        logout(request)
+        return JsonResponse({'is_logged': False}, status=200)
+    
 @csrf_exempt
 def checkLogin(request):
     if request.user.is_authenticated:

@@ -7,5 +7,6 @@ urlpatterns = [
     path('getProduct/<int:id>', getProduct),
     path('register/', registerUser),
     path('login/', loginUser),
+    path('logout/', logoutUser),
     path('checkLogin/', checkLogin),
 ]

@@ -33,7 +33,7 @@ const Header = () => {
                                     <LuShoppingCart />
                                 </li>
                                 <li className="text-2xl">
-                                    <GoPerson onClick={() => handleNavigate('/login')} />
+                                    <GoPerson onClick={() => handleNavigate('/profile')} />
                                 </li>
                             </>
                             :
