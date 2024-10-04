@@ -96,6 +96,53 @@ def logoutUser(request):
 @csrf_exempt
 def checkLogin(request):
     if request.user.is_authenticated:
-        return JsonResponse({'username': request.user.username, 'is_logged': True}, status=200)
+        return JsonResponse({'username': request.user.username, 
+                            'is_logged': True, 
+                            'id': request.user.id}, status=200)
     else:
         return JsonResponse({'is_logged': False}, status=200)
+    
+@csrf_exempt
+def getUserCart(request):
+    if request.user.is_authenticated:
+        user = request.user
+        cart_items = list(Product.objects.filter(cart=user).values())
+
+        return JsonResponse({'cart_items': cart_items}, status=200)
+    
+
+@csrf_exempt
+def addProductToCart(request):
+    if request.user.is_authenticated:
+        data = json.loads(request.body)
+        productID = data.get('productID')
+
+        product = Product.objects.get(pk=productID)
+
+        user = request.user
+
+        if product.cart.filter(id=user.id).exists():
+            return JsonResponse({'added': False}, status=200)
+
+        product.cart.add(user)
+
+        return JsonResponse({'added': True}, status=200)
+    
+
+@csrf_exempt
+def removeProductFromCart(request):
+    if request.user.is_authenticated:
+        data = json.loads(request.body)
+        productID = data.get('productID')
+
+        product = Product.objects.get(pk=productID)
+        user = request.user
+
+        if product.cart.filter(id=user.id).exists():
+            product.cart.remove(user)
+
+            cart_items = list(Product.objects.filter(cart=user).values())
+
+            return JsonResponse({'removed': True, 'cart_items': cart_items}, status=200)
+
+        return JsonResponse({'removed': False}, status=200)

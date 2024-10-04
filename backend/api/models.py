@@ -11,6 +11,8 @@ class Category(models.Model):
     
 class Sizes(models.Model):
     name = models.CharField(max_length=4)
+    def __str__(self):
+        return self.name
     
 class Product(models.Model):
     name = models.CharField(max_length=64)
@@ -20,8 +22,8 @@ class Product(models.Model):
     categories = models.ManyToManyField(Category, related_name="products")
     available_sizes = models.ManyToManyField(Sizes, related_name="availableSizes_products")
     out_of_storage_sizes = models.ManyToManyField(Sizes, related_name="OutOfStorageSizes_products")
-    wish_list = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, related_name="wish_list")
-    cart = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, related_name="cart")
+    wish_list = models.ManyToManyField(User, blank=True, related_name="wish_list")
+    cart = models.ManyToManyField(User, blank=True, related_name="cart")
     image = models.ImageField(upload_to='products/', default='products/default-image.jpg')
 
     def __str__(self):

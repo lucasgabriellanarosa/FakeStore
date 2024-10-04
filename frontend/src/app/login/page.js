@@ -25,9 +25,6 @@ const page = () => {
     axios.post(`http://127.0.0.1:8000/api/login/`, data, {
       withCredentials: true,
     })
-    .then(response => 
-      router.push(`/profile`)
-    )
   }
 
   return (

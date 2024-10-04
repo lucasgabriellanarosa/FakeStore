@@ -15,7 +15,7 @@ const Header = () => {
         router.push(`${url}`);
     };
 
-    const isUserLogged = useAuth();
+    const userData = useAuth();
 
     return (
         <header className="bg-white px-5 py-3 flex flex-col gap-3 shadow-md fixed w-full z-50">
@@ -24,16 +24,16 @@ const Header = () => {
                 <h1 className="text-4xl hover:cursor-pointer" onClick={() => handleNavigate('/')}>Shoppe</h1>
                 <ul className="flex gap-3">
                     {
-                        isUserLogged ?
+                        userData.is_logged ?
                             <>
                                 <li className="text-2xl">
-                                    <FaRegHeart />
+                                    <FaRegHeart onClick={() => handleNavigate(`/wishlist`)}/>
                                 </li>
                                 <li className="text-2xl">
-                                    <LuShoppingCart />
+                                    <LuShoppingCart onClick={() => handleNavigate(`/cart`)}/>
                                 </li>
                                 <li className="text-2xl">
-                                    <GoPerson onClick={() => handleNavigate('/profile')} />
+                                    <GoPerson onClick={() => handleNavigate(`/profile`)} />
                                 </li>
                             </>
                             :

@@ -4,17 +4,17 @@ import { useRouter } from 'next/navigation';
 
 
 const useAuth = () => {
-    const [isUserLogged, setIsUserLogged] = useState(false)
+    const [userData, setUserData] = useState({})
     const router = useRouter();
 
     useEffect(() => {
         axios.get(`http://127.0.0.1:8000/api/checkLogin/`, {
             withCredentials: true,
         })
-        .then(response => setIsUserLogged(response.data.is_logged))
+        .then(response => setUserData(response.data))
     }, [router]);
 
-    return isUserLogged;
+    return userData;
 };
 
 export default useAuth;

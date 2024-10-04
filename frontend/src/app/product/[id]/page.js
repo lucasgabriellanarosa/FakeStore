@@ -6,8 +6,11 @@ import { useEffect, useState } from "react";
 import axios from 'axios';
 import { FaRegHeart } from "react-icons/fa";
 import { LuShoppingCart } from "react-icons/lu";
+import { useRouter } from 'next/navigation';
 
 export default function ProductPage({ params }) {
+
+  const router = useRouter();
 
   const [product, setProduct] = useState({})
 
@@ -16,9 +19,22 @@ export default function ProductPage({ params }) {
   useEffect(() => {
     axios.get(`http://127.0.0.1:8000/api/getProduct/${productId}`)
       .then(response => setProduct(response.data.product))
-  }, [productId])
+  }, [])
 
-  console.log(product)
+  const addProductToCart = () => {
+
+
+    const data = {
+      'productID': productId
+    }
+
+    axios.post(`http://127.0.0.1:8000/api/addProductToCart/`, data,  {
+      withCredentials: true,
+    })
+    .then(response => {
+        router.push(`/cart`);
+    }) 
+  }
 
   return (
     <div>
@@ -71,7 +87,7 @@ export default function ProductPage({ params }) {
           </ul>
         </div>
 
-        <button className="flex justify-center items-center gap-1 w-fit px-6 py-2 border-black border-2 text-lg"> 
+        <button className="flex justify-center items-center gap-1 w-fit px-6 py-2 border-black border-2 text-lg" onClick={addProductToCart}> 
           <LuShoppingCart />
           Comprar
         </button>

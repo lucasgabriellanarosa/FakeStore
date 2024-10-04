@@ -38,7 +38,8 @@ export default function Home() {
 
             <Main>
                 <ul className="flex flex-col gap-5">
-                    {Object.values(categories).map((category) => (
+                    {
+                    Object.values(categories).map((category) => (
                         <li className="text-2xl capitalize flex flex-col gap-1" key={category.id}>
                             <h2>{category.name} </h2>
                             <Swiper
@@ -63,11 +64,12 @@ export default function Home() {
                                 )
 
                                     :
-                                    <li>No products available.</li>
+                                    <li className="text-xl italic">No products available.</li>
                                 }
                             </Swiper>
                         </li>
-                    ))}
+                    ))
+                    }
                 </ul>
             </Main>
 
