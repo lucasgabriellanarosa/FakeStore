@@ -49,10 +49,10 @@ const page = () => {
                                     <div className="w-32 flex justify-center items-center bg-white">
                                         <img className="min-h-32 max-h-32" src={`http://127.0.0.1:8000/media/${product.image}`} />
                                     </div>
-                                    <div className='flex flex-col bg-cyan-500'>
+                                    <div className='flex flex-col py-2'>
                                         <h2 className="text-xl text-gray-800">{product.name}</h2>
                                         <h3 className="text-lg text-gray-500">R${product.price}</h3>
-                                        <button className='bg-red-400 self-start justify-self-end' onClick={() => removeProductFromCart(product.id)}>Remover</button>
+                                        <button className='bg-red-300 self-start mt-auto px-2 py-1 rounded-lg text-sm' onClick={() => removeProductFromCart(product.id)}>Remover</button>
                                     </div>
                                 </li>
                             ))}

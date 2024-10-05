@@ -27,9 +27,6 @@ const Header = () => {
                         userData.is_logged ?
                             <>
                                 <li className="text-2xl">
-                                    <FaRegHeart onClick={() => handleNavigate(`/wishlist`)}/>
-                                </li>
-                                <li className="text-2xl">
                                     <LuShoppingCart onClick={() => handleNavigate(`/cart`)}/>
                                 </li>
                                 <li className="text-2xl">

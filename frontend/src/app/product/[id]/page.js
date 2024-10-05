@@ -41,18 +41,17 @@ export default function ProductPage({ params }) {
       <Header />
       <Main>
 
-        <ul className="flex gap-2 items-center">
+        <ul className="flex gap-2">
           {
             product.categories ?
               product.categories.map((category) => (
-                <li className="bg-gray-300 px-3 py-1 rounded-2xl text-xs">
+                <li className="bg-gray-300 px-3 py-1 rounded-2xl text-sm">
                   {category.name}
                 </li>
               ))
               :
               <></>
           }
-          <FaRegHeart className="text-xl" />
         </ul>
         <img src={`http://127.0.0.1:8000/media/${product.image}`} />
         

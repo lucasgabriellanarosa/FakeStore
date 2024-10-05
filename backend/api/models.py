@@ -22,7 +22,6 @@ class Product(models.Model):
     categories = models.ManyToManyField(Category, related_name="products")
     available_sizes = models.ManyToManyField(Sizes, related_name="availableSizes_products")
     out_of_storage_sizes = models.ManyToManyField(Sizes, related_name="OutOfStorageSizes_products")
-    wish_list = models.ManyToManyField(User, blank=True, related_name="wish_list")
     cart = models.ManyToManyField(User, blank=True, related_name="cart")
     image = models.ImageField(upload_to='products/', default='products/default-image.jpg')
 
