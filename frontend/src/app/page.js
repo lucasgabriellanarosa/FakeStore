@@ -54,9 +54,11 @@ export default function Home() {
                                     category.products.map((product) => (
                                         <SwiperSlide key={product.id} className="border-2 border-gray-200 p-2 flex flex-col gap-2">
                                             <FaRegHeart className="self-end text-xl" />
-                                            <img className="min-h-32 max-h-32" src={`http://127.0.0.1:8000/media/${product.image}`} />
-                                            <div>
-                                                <h3 onClick={() => handleNavigate(`${product.id}`)} className="text-gray-700 text-2xl italic underline hover:cursor-pointer">{product.name}</h3>
+                                            <img className="min-h-32 max-h-32 min-w-32 max-w-32" src={`http://127.0.0.1:8000/media/${product.image}`} />
+                                            <div className='flex flex-col gap-2'>
+                                                <h3 onClick={() => handleNavigate(`${product.id}`)} className="text-gray-700 text-2xl italic underline hover:cursor-pointer">
+                                                {product.name.length > 16 ? `${product.name.substring(0, 24)}...` : product.name}
+                                                </h3>
                                                 <h4 className="text-gray-500 text-xl italic">R${product.price}</h4>
                                             </div>
                                         </SwiperSlide>

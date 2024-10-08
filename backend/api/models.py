@@ -24,6 +24,8 @@ class Product(models.Model):
     out_of_storage_sizes = models.ManyToManyField(Sizes, related_name="OutOfStorageSizes_products")
     cart = models.ManyToManyField(User, blank=True, related_name="cart")
     image = models.ImageField(upload_to='products/', default='products/default-image.jpg')
+    # selected_size
+    # quantity_buying
 
     def __str__(self):
         return self.name

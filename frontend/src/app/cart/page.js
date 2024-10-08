@@ -75,9 +75,9 @@ Aguardo as instruções para concluir a compra. Obrigado!
                         <div>
                             <ul className="flex flex-col justify-center w-full gap-4">
                                 {userCard.map((product) => (
-                                    <li className='flex border-y-2 border-gray-400 py-2' key={product.id}>
+                                    <li className='flex border-y-2 border-gray-400 py-2 gap-3' key={product.id}>
                                         <div className="w-32 flex justify-center items-center bg-white">
-                                            <img className="min-h-32 max-h-32" src={`http://127.0.0.1:8000/media/${product.image}`} />
+                                            <img className="min-h-32 max-h-32 min-w-32 max-w-32" src={`http://127.0.0.1:8000/media/${product.image}`} />
                                         </div>
                                         <div className='flex flex-col py-2'>
                                             <h2 className="text-xl text-gray-800">{product.name}</h2>

@@ -106,7 +106,7 @@ def checkLogin(request):
 def getUserCart(request):
     if request.user.is_authenticated:
         user = request.user
-        cart_items = list(Product.objects.filter(cart=user).values())
+        cart_items = list(Product.objects.filter(cart=user).order_by('name').values())
 
         return JsonResponse({'cart_items': cart_items}, status=200)
     
