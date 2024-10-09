@@ -4,13 +4,12 @@ import Header from "@/app/components/Header/Header";
 import Main from "@/app/components/Main/Main";
 import { useEffect, useState } from "react";
 import axios from 'axios';
-import { FaRegHeart } from "react-icons/fa";
 import { LuShoppingCart } from "react-icons/lu";
-import { useRouter } from 'next/navigation';
+import useNavigate from "@/app/hooks/useNavigate";
 
 export default function ProductPage({ params }) {
 
-  const router = useRouter();
+  const navigate = useNavigate()
 
   const [product, setProduct] = useState({})
 
@@ -22,8 +21,6 @@ export default function ProductPage({ params }) {
   }, [])
 
   const addProductToCart = () => {
-
-
     const data = {
       'productID': productId
     }
@@ -32,7 +29,7 @@ export default function ProductPage({ params }) {
       withCredentials: true,
     })
     .then(response => {
-        router.push(`/cart`);
+      navigate(`cart`);
     }) 
   }
 
@@ -45,7 +42,7 @@ export default function ProductPage({ params }) {
           {
             product.categories ?
               product.categories.map((category) => (
-                <li className="bg-gray-300 px-3 py-1 rounded-2xl text-sm">
+                <li key={category.name} className="bg-gray-300 px-3 py-1 rounded-2xl text-sm">
                   {category.name}
                 </li>
               ))
@@ -66,7 +63,7 @@ export default function ProductPage({ params }) {
             {
               product.available_sizes?
               product.available_sizes.map((size) => (
-                <li className="px-5 text-xl border-black border-2 rounded-2xl">
+                <li key={size.name} className="px-5 text-xl border-black border-2 rounded-2xl">
                   {size.name}
                 </li>
               ))
@@ -76,7 +73,7 @@ export default function ProductPage({ params }) {
             {
               product.out_of_storage_sizes?
               product.out_of_storage_sizes.map((size) => (
-                <li className="px-5 text-xl border-gray-200 border-2 rounded-2xl text-gray-400">
+                <li key={size.name} className="px-5 text-xl border-gray-200 border-2 rounded-2xl text-gray-400">
                   {size.name}
                 </li>
               ))

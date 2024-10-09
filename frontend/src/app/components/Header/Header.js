@@ -1,41 +1,35 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
 import { GoPerson } from "react-icons/go";
 import { LuShoppingCart } from "react-icons/lu";
-import { FaRegHeart } from "react-icons/fa";
 import { IoIosSearch } from "react-icons/io";
-import { useRouter } from 'next/navigation';
 import useAuth from '@/app/hooks/useAuth';
+import useNavigate from "@/app/hooks/useNavigate";
 
 const Header = () => {
 
-    const router = useRouter();
-    const handleNavigate = (url) => {
-        router.push(`${url}`);
-    };
-
+    const navigate = useNavigate()
     const userData = useAuth();
 
     return (
         <header className="bg-white px-5 py-3 flex flex-col gap-3 shadow-md fixed w-full z-50">
 
             <div className="flex justify-between items-center">
-                <h1 className="text-4xl hover:cursor-pointer" onClick={() => handleNavigate('/')}>Shoppe</h1>
+                <h1 className="text-4xl hover:cursor-pointer" onClick={() => navigate('/')}>Shoppe</h1>
                 <ul className="flex gap-3">
                     {
                         userData.is_logged ?
                             <>
                                 <li className="text-2xl">
-                                    <LuShoppingCart onClick={() => handleNavigate(`/cart`)}/>
+                                    <LuShoppingCart onClick={() => navigate(`cart`)}/>
                                 </li>
                                 <li className="text-2xl">
-                                    <GoPerson onClick={() => handleNavigate(`/profile`)} />
+                                    <GoPerson onClick={() => navigate(`profile`)} />
                                 </li>
                             </>
                             :
                             <li className="text-2xl">
-                                <GoPerson onClick={() => handleNavigate('/login')} />
+                                <GoPerson onClick={() => navigate('login')} />
                             </li>
                     }
 

@@ -1,29 +1,20 @@
 "use client";
 
 import { useEffect, useState } from "react";
-
 import { FaRegHeart } from "react-icons/fa";
-
-
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules';
-
 import './globals.css'
-
-import { useRouter } from 'next/navigation';
 import Header from "./components/Header/Header";
 import Main from "./components/Main/Main";
-
 import axios from 'axios';
+import useNavigate from "./hooks/useNavigate";
 
 export default function Home() {
 
-    const router = useRouter();
-    const handleNavigate = (id) => {
-        router.push(`/product/${id}`);
-    };
+    const navigate = useNavigate()
 
     const [categories, setCategories] = useState([])
     
@@ -56,7 +47,7 @@ export default function Home() {
                                             <FaRegHeart className="self-end text-xl" />
                                             <img className="min-h-32 max-h-32 min-w-32 max-w-32" src={`http://127.0.0.1:8000/media/${product.image}`} />
                                             <div className='flex flex-col gap-2'>
-                                                <h3 onClick={() => handleNavigate(`${product.id}`)} className="text-gray-700 text-2xl italic underline hover:cursor-pointer">
+                                                <h3 onClick={() => navigate(`product/${product.id}`)} className="text-gray-700 text-2xl italic underline hover:cursor-pointer">
                                                 {product.name.length > 16 ? `${product.name.substring(0, 24)}...` : product.name}
                                                 </h3>
                                                 <h4 className="text-gray-500 text-xl italic">R${product.price}</h4>

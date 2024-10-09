@@ -3,15 +3,12 @@
 import React, { useRef } from 'react'
 import Header from '../components/Header/Header'
 import Main from '../components/Main/Main'
-import { useRouter } from 'next/navigation';
 import axios from 'axios';
+import useNavigate from '../hooks/useNavigate';
 
 const page = () => {
 
-  const router = useRouter();
-  const handleNavigate = (url) => {
-      router.push(`${url}`);
-  };
+  const navigate = useNavigate()
 
   const username = useRef('')
   const password = useRef('')
@@ -25,7 +22,7 @@ const page = () => {
       'confirm_password': confirm_password.current.value
     }
     axios.post(`http://127.0.0.1:8000/api/register/`, data)
-    .then(response => console.log(response.data))
+    .then(response => navigate("/"))
   }
 
   return (
@@ -68,7 +65,7 @@ const page = () => {
 
             <p className="mt-10 text-center text-sm text-gray-500">
               Já tem uma conta?
-              <span onClick={() => handleNavigate('/login')} className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"> Faça login aqui!</span>
+              <span onClick={() => navigate('login')} className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"> Faça login aqui!</span>
             </p>
           </div>
         </div>

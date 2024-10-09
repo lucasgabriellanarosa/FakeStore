@@ -3,15 +3,12 @@
 import React, { useRef } from 'react'
 import Header from '../components/Header/Header'
 import Main from '../components/Main/Main'
-import { useRouter } from 'next/navigation';
 import axios from 'axios';
+import useNavigate from '../hooks/useNavigate';
 
 const page = () => {
 
-  const router = useRouter();
-  const handleNavigate = (url) => {
-      router.push(`${url}`);
-  };
+  const navigate = useNavigate()
 
   const username = useRef('')
   const password = useRef('')
@@ -52,13 +49,13 @@ const page = () => {
               </div>
 
               <div>
-                <button type="submit" onClick={() => handleNavigate('/')} className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Entrar</button>
+                <button type="submit" onClick={() => navigate('/')} className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Entrar</button>
               </div>
             </form>
 
             <p className="mt-10 text-center text-sm text-gray-500">
               Não tem uma conta?
-              <span onClick={() => handleNavigate('/register')} className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"> Registre-se aqui!</span>
+              <span onClick={() => navigate('register')} className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"> Registre-se aqui!</span>
             </p>
           </div>
         </div>
