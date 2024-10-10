@@ -28,7 +28,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'http://localhost',
-    '127.0.0.1'
+    '127.0.0.1', 
+    ".vercel.app"
 ]
 
 CSRF_TRUSTED_ORIGINS = ['http://localhost']
@@ -83,7 +84,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'backend.wsgi.application'
+WSGI_APPLICATION = 'api.wsgi.app'
 
 
 # Database
