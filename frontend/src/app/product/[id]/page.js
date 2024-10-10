@@ -57,7 +57,7 @@ export default function ProductPage({ params }) {
           <h3 className="text-gray-500 text-xl">R${product.price}</h3>
         </div>
 
-        <div>
+        {/* <div>
           <h2 className="text-gray-950 text-3xl">Tamanho</h2>
           <ul className="flex gap-2 items-center">
             {
@@ -81,7 +81,7 @@ export default function ProductPage({ params }) {
               <></>
             }
           </ul>
-        </div>
+        </div> */}
 
         <button className="flex justify-center items-center gap-1 w-fit px-6 py-2 border-black border-2 text-lg" onClick={addProductToCart}> 
           <LuShoppingCart />

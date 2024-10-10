@@ -29,3 +29,16 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+    
+class Ordering(models.Model):
+    buyer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='ordering')
+    products = models.ManyToManyField(Product, blank=False, null=False, related_name='ordering')
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    paid = models.BooleanField(default=False)
+
+    def __str__(self):
+        buyer_username = self.buyer.username if self.buyer and self.buyer.username else "Desconhecido"
+        price_str = f"R${self.price}" if self.price is not None else "Preço não disponível"
+        product_names = ", ".join([product.name for product in self.products.all()]) if self.products.exists() else "Produtos desconhecidos"
+
+        return f"{buyer_username} ({price_str}): {product_names}"
