@@ -29,14 +29,16 @@ DEBUG = True
 ALLOWED_HOSTS = [
     'http://localhost',
     '127.0.0.1', 
-    ".vercel.app"
+    ".vercel.app",
+    'https://fake-store-seven.vercel.app'
 ]
 
-CSRF_TRUSTED_ORIGINS = ['http://localhost']
+CSRF_TRUSTED_ORIGINS = ['http://localhost', 'https://fake-store-seven.vercel.app']
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
+    'https://fake-store-seven.vercel.app'
 ]
 
 CORS_ALLOW_CREDENTIALS = True 
@@ -84,7 +86,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'api.wsgi.app'
+WSGI_APPLICATION = 'backend.wsgi.app'
 
 
 # Database

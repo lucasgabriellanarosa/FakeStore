@@ -50,8 +50,6 @@ def getProduct(request, id):
         'storage': productData.storage,
         'image': str(productData.image),
         'categories': list(productData.categories.values()),
-        'available_sizes': list(productData.available_sizes.values()),
-        'out_of_storage_sizes': list(productData.out_of_storage_sizes.values()),
     }
     return JsonResponse({"product": product}, safe=False)
 
@@ -141,7 +139,7 @@ def removeProductFromCart(request):
         if product.cart.filter(id=user.id).exists():
             product.cart.remove(user)
 
-            cart_items = list(Product.objects.filter(cart=user).values())
+            cart_items = list(Product.objects.filter(cart=user).order_by('name').values())
 
             return JsonResponse({'removed': True, 'cart_items': cart_items}, status=200)
 

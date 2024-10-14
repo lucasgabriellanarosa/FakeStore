@@ -21,7 +21,9 @@ const page = () => {
       'password': password.current.value,
       'confirm_password': confirm_password.current.value
     }
-    axios.post(`http://127.0.0.1:8000/api/register/`, data)
+    axios.post(`http://127.0.0.1:8000/api/register/`, data, {
+      withCredentials: true,
+    })
     .then(response => navigate("/"))
   }
 

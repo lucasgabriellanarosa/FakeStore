@@ -19,9 +19,12 @@ const page = () => {
       'username': username.current.value,
       'password': password.current.value,
     }
+
+
     axios.post(`http://127.0.0.1:8000/api/login/`, data, {
       withCredentials: true,
     })
+    .then(response => navigate("/"))
   }
 
   return (
@@ -49,7 +52,7 @@ const page = () => {
               </div>
 
               <div>
-                <button type="submit" onClick={() => navigate('/')} className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Entrar</button>
+                <button type="submit" className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Entrar</button>
               </div>
             </form>
 
