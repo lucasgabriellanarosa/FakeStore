@@ -19,3 +19,9 @@
     object-fit: cover;
   }
   
+  
+@layer utilities {
+    .font-josefin{
+        font-family: var(--font-josefin);
+    }
+}

@@ -26,12 +26,7 @@ SECRET_KEY = 'django-insecure-+&52=q*fe&dm%v(^hmv%td503!(8p4w)18q1=ypmh&p&!df=je
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    'http://localhost',
-    '127.0.0.1', 
-    ".vercel.app",
-    'https://fake-store-seven.vercel.app'
-]
+ALLOWED_HOSTS = ['*']
 
 CSRF_TRUSTED_ORIGINS = ['http://localhost', 'https://fake-store-seven.vercel.app']
 
@@ -86,7 +81,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'backend.wsgi.app'
+WSGI_APPLICATION = 'backend.wsgi.application'
 
 
 # Database
@@ -131,11 +126,6 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.0/howto/static-files/
-
-STATIC_URL = 'static/'
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
@@ -145,3 +135,9 @@ CORS_ALLOW_ALL_ORIGINS = True
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media') 
+
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/4.0/howto/static-files/
+
+STATIC_URL = 'static/'
