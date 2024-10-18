@@ -42,7 +42,7 @@ export default function ProductPage({ params }) {
           {
             product.categories ?
               product.categories.map((category) => (
-                <li key={category.name} className="bg-gray-300 px-3 py-1 rounded-2xl text-sm">
+                <li key={category.name} className="bg-green-200 text-indigo-800 px-3 py-1 rounded-2xl text-md">
                   {category.name}
                 </li>
               ))
@@ -53,8 +53,8 @@ export default function ProductPage({ params }) {
         <img src={`http://127.0.0.1:8000/media/${product.image}`} />
         
         <div>
-          <h2 className="capitalize italic text-gray-700 text-3xl">{product.name}</h2>
-          <h3 className="text-gray-500 text-xl">R${product.price}</h3>
+          <h2 className="capitalize italic text-green-700 text-3xl">{product.name}</h2>
+          <h3 className="text-purple-800 text-2xl">R${product.price}</h3>
         </div>
 
         {/* <div>
@@ -83,14 +83,14 @@ export default function ProductPage({ params }) {
           </ul>
         </div> */}
 
-        <button className="flex justify-center items-center gap-1 w-fit px-6 py-2 border-black border-2 text-lg" onClick={addProductToCart}> 
+        <button className="flex justify-center items-center gap-1 w-fit px-6 py-2 border-green-600 text-green-800 border-2 text-lg" onClick={addProductToCart}> 
           <LuShoppingCart />
           Comprar
         </button>
 
         <div>
-          <h2 className="text-gray-950 text-3xl">Descrição</h2>
-          <p>{product.description}</p>
+          <h2 className="text-purple-800 text-3xl">Descrição</h2>
+          <p className="text-lg">{product.description}</p>
         </div>
 
       </Main>
