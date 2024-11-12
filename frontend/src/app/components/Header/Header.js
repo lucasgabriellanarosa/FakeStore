@@ -12,23 +12,23 @@ const Header = () => {
     const userData = useAuth();
 
     return (
-        <header className="px-5 py-3 flex flex-col gap-3 shadow-md fixed w-full z-50 bg-gradient-to-r from-indigo-500 to-purple-400">
+        <header className="px-5 py-2 flex flex-col gap-3 shadow-xl fixed w-full z-50 bg-gradient-to-r from-indigo-500 to-indigo-400 items-center">
 
-            <div className="flex justify-between items-center">
-                <h1 className="text-4xl hover:cursor-pointer text-green-400 font-josefin" onClick={() => navigate('/')}>Ecommerce</h1>
+            <div className="flex justify-between items-center w-full md:w-2/3">
+                <h1 className="text-4xl hover:cursor-pointer text-green-400 font-josefin transition-all  hover:text-green-200" onClick={() => navigate('/')}>Ecommerce</h1>
                 <ul className="flex gap-3">
                     {
                         userData.is_logged ?
                             <>
-                                <li className="text-2xl text-green-400">
+                                <li className="text-2xl text-green-400 cursor-pointer transition-all duration-300 hover:text-green-200">
                                     <LuShoppingCart onClick={() => navigate(`cart`)} />
                                 </li>
-                                <li className="text-2xl text-green-400">
+                                <li className="text-2xl text-green-400 cursor-pointer transition-all duration-300 hover:text-green-200">
                                     <GoPerson onClick={() => navigate(`profile`)} />
                                 </li>
                             </>
                             :
-                            <li className="text-2xl text-green-400">
+                            <li className="text-2xl text-green-400 cursor-pointer transition-all duration-300 hover:text-green-200">
                                 <GoPerson onClick={() => navigate('login')} />
                             </li>
                     }
@@ -36,8 +36,8 @@ const Header = () => {
                 </ul>
             </div>
 
-            <form className="flex justify-around items-center bg-white border-green-400 border-solid border-2 self-center px-3 py-1 rounded-2xl shadow-sm w-9/12">
-                <input placeholder="O que você procura hoje?" className="bg-transparent text-green-600 placeholder-green-600 outline-none" />
+            <form className="flex justify-between items-center bg-white border-green-400 border-solid border-2 self-center px-3 py-1 rounded-2xl shadow-sm w-9/12 max-w-md">
+                <input placeholder="O que você procura hoje?" className="bg-transparent text-green-600 placeholder-green-600 w-full outline-none" />
                 <IoIosSearch className="text-xl text-green-600" />
             </form>
 
